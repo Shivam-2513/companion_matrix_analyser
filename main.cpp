@@ -5,6 +5,7 @@ using namespace std;
 using db = double;
 template<typename T>
 using V = vector<T>;
+const db EPS = 1e-9;
 V<V<db>> transpose(V<V<db>>& A){
     int n = A.size(), m = A[0].size();
     V<V<db>> At(m, V<db>(n, 0.0));
@@ -41,7 +42,7 @@ void RREF(V<V<db>>& A){//pivots are not necessarily 1
             }
         }
         pivot_row = curr_row;
-        if(A[pivot_row][pivot_col] != 0){
+        if(abs(A[pivot_row][pivot_col]) > EPS /*means non zero*/){
             db x = A[pivot_row][pivot_col];
             loop(j, 0, m - 1) A[pivot_row][j] /= x;
             loop(r, 0, n - 1){
@@ -107,6 +108,8 @@ V<V<db>> work(V<V<db>>& T, V<V<db>>& α){
         }
         cols++;
     }
+    cols--;
+    for(auto& rows: B) rows.pop_back();
     V<V<db>> prev(n, V<db>(1, 0.0));
     loop(i, 0, n - 1){
         prev[i][0] = B[i][cols - 1];
