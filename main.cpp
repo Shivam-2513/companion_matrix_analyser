@@ -127,25 +127,25 @@ V<V<db>> companion_matrix(V<V<db>>& T, V<V<db>>& α){
         companion[j + 1][j] = 1;
     }
     loop(i, 0, k - 1){
-        companion[i][k - 1] = -p[k - 1 - i][0];
+        companion[i][k - 1] = p[k - 1 - i][0];
     }
     return companion;
 }
 int main(){
-    V<V<db>> T = {{0, 0, 0}, {1, 0, -1}, {0, 1, 2}};
-    V<V<db>> α = {{1}, {0}, {0}};
+    V<V<db>> T = {{1, 0, 0}, {0, 2, 0}, {0, 0, 3}};
+    V<V<db>> α = {{1}, {1}, {1}};
 
     V<V<db>> p = work(T, α);
     reverse(p.begin(), p.end());
-    int k = p.size() - 1;
-    cout << "x" << k + 1 << ": " << "1\n";
+    int k = p.size();
+    cout << "x" << k-- << ": " << "1\n";
     for(auto& coeff: p){
-        cout << "x" << k << ": " << coeff[0] << '\n';
+        cout << "x" << k-- << ": " << -coeff[0] << '\n';
     }
     k = p.size();
     auto cm = companion_matrix(T, α);
-    cm[0][k - 1] = 1;
-    loop(i, 1, k - 1){
+    //cm[0][k - 1] = 1;
+    loop(i, 0, k - 1){
         loop(j, 0, k - 1) cout << cm[i][j] << ' ';
         cout << '\n';
     }
