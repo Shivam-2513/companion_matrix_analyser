@@ -132,11 +132,10 @@ V<V<db>> companion_matrix(V<V<db>>& T, V<V<db>>& α){
     return companion;
 }
 int main(){
-    V<V<db>> T = {{1, 0, 0}, {0, 2, 0}, {0, 0, 3}};
-    V<V<db>> α = {{1}, {1}, {1}};
+    V<V<db>> T = {{1, 0, 0, 0}, {1, 2, 0, 0}, {0, 1, 3, 0}, {0, 0, 1, 4}};
+    V<V<db>> α = {{1}, {0}, {0}, {0}};
 
     V<V<db>> p = work(T, α);
-    reverse(p.begin(), p.end());
     int k = p.size();
     cout << "x" << k-- << ": " << "1\n";
     for(auto& coeff: p){
