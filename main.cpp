@@ -63,7 +63,7 @@ int matrix_rank(V<V<db>> B){
     int rk = 0;
     loop(i, 0, n - 1){
         loop(j, 0, m - 1){
-            if(A[i][j] != 0){
+            if(abs(A[i][j]) > EPS){
                 rk++;
                 break;
             }
